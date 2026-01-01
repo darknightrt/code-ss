@@ -1,0 +1,41 @@
+# Supabase 本地开发配置
+
+[project]
+# 项目名称
+name = "codesensei"
+
+[api]
+# API 端口
+port = 54321
+# API 配置
+schemas = ["public", "next_auth"]
+extra_search_path = ["public", "next_auth"]
+max_rows = 1000
+
+[db]
+# 数据库端口
+port = 54322
+# 数据库配置
+major_version = 15
+
+[studio]
+# Supabase Studio 端口
+port = 54323
+
+[inbucket]
+# 邮件测试服务端口
+port = 54324
+
+[auth]
+# 认证配置
+enabled = true
+# JWT 过期时间（秒）
+jwt_expiry = 3600
+# 启用注册
+enable_signup = true
+
+[auth.email]
+# 邮箱认证配置
+enable_signup = true
+double_confirm_changes = true
+enable_confirmations = false
