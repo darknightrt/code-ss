@@ -45,7 +45,7 @@ export function usePlans(includeDeleted = false) {
     queryKey: ['learning-plans', session?.user?.id, includeDeleted],
     queryFn: async () => {
       if (!session?.user?.id) return [];
-      const plans = await planRepository.getPlansByUser(session.user.id, includeDeleted);
+      const plans = await planRepository.getPlansByUser(session.user.id, { includeDeleted });
       // 转换数据库字段名为前端使用的 camelCase
       return plans.map(plan => ({
         id: plan.id,
