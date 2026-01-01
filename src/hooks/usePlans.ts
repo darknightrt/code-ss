@@ -45,7 +45,24 @@ export function usePlans(includeDeleted = false) {
     queryKey: ['learning-plans', session?.user?.id, includeDeleted],
     queryFn: async () => {
       if (!session?.user?.id) return [];
-      return await planRepository.getPlansByUser(session.user.id, includeDeleted);
+      const plans = await planRepository.getPlansByUser(session.user.id, includeDeleted);
+      // 转换数据库字段名为前端使用的 camelCase
+      return plans.map(plan => ({
+        id: plan.id,
+        title: plan.title,
+        description: plan.description,
+        status: plan.status,
+        category: plan.category,
+        progress: plan.progress,
+        startDate: plan.start_date,
+        endDate: plan.end_date,
+        start_date: plan.start_date,
+        end_date: plan.end_date,
+        user_id: plan.user_id,
+        deleted_at: plan.deleted_at,
+        created_at: plan.created_at,
+        updated_at: plan.updated_at,
+      }));
     },
     enabled: !!session?.user?.id,
   });
